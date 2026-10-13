@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UH QuickLinks</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Header with the title and the add / edit buttons. -->
+  <header class="header">
+    <div class="brand">
+      <img src="icons/icon32.png" alt="" width="22" height="22">
+      <h1>UH QuickLinks</h1>
+    </div>
+    <div class="header-actions">
+      <button id="toggleAdd" class="icon-btn" title="Add a link" aria-label="Add a link" aria-expanded="false">+</button>
+      <button id="toggleEdit" class="icon-btn" title="Edit links" aria-label="Edit links" aria-pressed="false">✎</button>
+    </div>
+  </header>
+
+  <!-- Search bar. It gets focused right away so you can just start typing. -->
+  <div class="search-wrap">
+    <input id="search" type="search" placeholder="Search links…  (Enter opens top result)" autocomplete="off" spellcheck="false" aria-label="Search links">
+  </div>
+
+  <!-- Form for adding a custom link. Hidden until the + button is clicked. -->
+  <form id="addForm" class="add-form" hidden>
+    <input id="addTitle" type="text" placeholder="Name (e.g. COSC 3380 Canvas)" required maxlength="60">
+    <input id="addUrl" type="text" placeholder="URL (e.g. canvas.uh.edu/courses/123)" required>
+    <div class="add-row">
+      <label class="pin-check"><input id="addPinned" type="checkbox"> Pin it</label>
+      <button type="submit" class="primary">Add link</button>
+    </div>
+    <p id="addError" class="error" role="alert" hidden></p>
+  </form>
+
+  <!-- The links get added into these two lists by popup.js. -->
+  <main id="content">
+    <section id="pinnedSection">
+      <h2>Pinned</h2>
+      <ul id="pinnedList" class="link-list" data-pinned="true"></ul>
+    </section>
+    <section id="allSection">
+      <h2 id="allHeading">All links</h2>
+      <ul id="allList" class="link-list" data-pinned="false"></ul>
+    </section>
+    <p id="empty" class="empty" hidden>No links match your search.</p>
+  </main>
+
+  <!-- Footer with a quick hint and the reset button (only shows in edit mode). -->
+  <footer class="footer">
+    <span id="hint">Drag to reorder · ★ to pin</span>
+    <button id="reset" class="link-btn" hidden>Reset to defaults</button>
+  </footer>
+
+  <!-- popup.js is a module so it can import the default links from links.js. -->
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
